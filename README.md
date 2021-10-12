@@ -22,7 +22,7 @@ Another yet example:
 Start file downloading using curl with downloading progress processing
 
 ```
-readStdout := func(status OutputStatus) bool {
+readStdout := func(status cmdWorker.OutputStatus) bool {
         //regexp to parse the curl progress line (we need the second number)
 		progressRegexp := regexp.MustCompile(`^\d+\s+(\d+)`)
 		
@@ -40,17 +40,17 @@ readStdout := func(status OutputStatus) bool {
 	}
 
 //download the www.google.com index page using curl with a speed limit of 2kb/s to demonstrate long time stdout parsing
-cw := NewCmdWorker("curl", []string{"www.google.com", "--limit-rate", "2000", "-o", "/dev/null"}, readStdout)
+cw := cmdWorker.NewCmdWorker("curl", []string{"www.google.com", "--limit-rate", "2000", "-o", "/dev/null"}, readStdout)
 status, err := cw.Run(nil)
 
 if err != nil {
-    if err == ErrOperation {
+    if err == cmdWorker.ErrOperation {
         fmt.Printf("%v finished with error %v", status.Cmd, status.Exit)
     } else if _, ok := err.(*InterruptedError); ok {
         fmt.Printf("%v interrupted", status.Cmd)
     }
 }
 
-	fmt.Printf("%v finished", status.Cmd)
+fmt.Printf("%v finished", status.Cmd)
 ```
 
