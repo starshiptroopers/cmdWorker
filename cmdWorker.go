@@ -34,10 +34,10 @@ type OutputStatus struct {
 	gocmd.Status
 }
 
-const (
+var (
 	DefTimeout      = time.Second * 120 //timeout the cmd must finished
-	DefReadTimeout  = time.Second * 30  //timeout waiting new data from stdout
-	DefReadInterval = time.Second * 1   //the interval outputHandler is called to read the buffer
+	DefReadTimeout  = time.Second * 30  //timeout waiting new data from stdout/stderr
+	DefReadInterval = time.Second * 1   //the interval outputHandler is called to process the output
 )
 
 const (
