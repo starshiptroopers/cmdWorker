@@ -29,8 +29,8 @@ type CmdWorker struct {
 }
 
 type OutputStatus struct {
-	newStdoutlines []string
-	newStderrLines []string
+	NewStdoutlines []string
+	NewStderrLines []string
 	gocmd.Status
 }
 
