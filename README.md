@@ -36,11 +36,11 @@ readStdout := func(status cmdWorker.OutputStatus) bool {
         //regexp to parse the curl progress line (we need the second number)
 		progressRegexp := regexp.MustCompile(`^\d+\s+(\d+)`)
 		
-		if len(status.newStderrLines) == 0 {
+		if len(status.NewStderrLines) == 0 {
 			return true
 		}
 		//get the last line from the output removing leading \r
-		l := strings.TrimPrefix(status.newStderrLines[len(status.newStderrLines)-1], "\r")
+		l := strings.TrimPrefix(status.NewStderrLines[len(status.NewStderrLines)-1], "\r")
 		matches := progressRegexp.FindStringSubmatchIndex(l)
 		if len(matches) > 0 {
 			s := string(progressRegexp.ExpandString(nil, "$1", l, matches))
