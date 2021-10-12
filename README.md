@@ -4,7 +4,17 @@ cmdWorker is the Golang library wrapping github.com/go-cmd/cmd adding timeouts,p
 
 cmdWorker should not be used for console commands with huge output because go-cmd is used in buffering mode storing all stdout and stderr output in a memory
 
-Usage:
+Three configurable timeouts is supoorted:
+
+```
+var (
+	DefTimeout      = time.Second * 120 //timeout the cmd must finished
+	DefReadTimeout  = time.Second * 30  //timeout waiting new data from stdout/stderr
+	DefReadInterval = time.Second * 1   //the interval outputHandler is called to process the output
+)
+```
+
+##### Usage:
 ```
 cw := cmdWorker.NewCmdWorker(cmdPath, []string{}, readStdout)
 status, err := cw.Run(nil)
@@ -18,8 +28,8 @@ if err != nil {
 }
 ```
 
-Another yet example:
-Start file downloading using curl with downloading progress processing
+##### Another yet example:
+Do a file downloading using curl with progress processing
 
 ```
 readStdout := func(status cmdWorker.OutputStatus) bool {
