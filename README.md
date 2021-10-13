@@ -1,8 +1,8 @@
 # cmdWorker
 
-cmdWorker is the Golang library wrapping github.com/go-cmd/cmd adding timeouts,periodic output parsing using callback function and ability to abort command execution from output parsing callback function.
+cmdWorker is the Golang library wrapping github.com/go-cmd/cmd adding timeouts and callback to parse stdout and stderr at regular intervals
 
-cmdWorker should not be used for console commands with huge output because go-cmd is used in buffering mode storing all stdout and stderr output in a memory
+It should not be used for console commands with huge output because go-cmd is used in buffering mode storing all stdout and stderr output in a memory
 
 Three configurable timeouts is supoorted:
 
